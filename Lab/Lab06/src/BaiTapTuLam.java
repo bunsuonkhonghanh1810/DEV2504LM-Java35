@@ -3,11 +3,13 @@ import java.util.Scanner;
 
 public class BaiTapTuLam {
     public static void main(String[] args) {
+//      Bài 1
         System.out.print("Mang: ");
         int[] arr1 = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         for (int i: arr1) System.out.print(i + " ");
         System.out.println();
 
+//      Bài 2
         Random rand = new Random();
         int[] arr2 = new int[10];
 
@@ -16,6 +18,7 @@ public class BaiTapTuLam {
         for (int i: arr2) System.out.print(i + " ");
         System.out.println();
 
+//      Bài 3
         int n;
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap n: ");
@@ -99,5 +102,27 @@ public class BaiTapTuLam {
         System.out.print("Mang random bubble sort: ");
         for (int i: arr5) System.out.print(i + " ");
         System.out.println();
+
+        int[] arr6 = new int[n];
+        for (int i = 0; i < arr6.length; i++) arr6[i] = rand.nextInt(100);
+        System.out.print("Mang random: ");
+        for (int i: arr6) System.out.print(i + " ");
+        System.out.println();
+
+        for (int i = 1; i < arr6.length; i++) {
+            int key = arr6[i];
+            int j = i - 1;
+
+            while (j >= 0 && arr6[j] > key) {
+                arr6[j + 1] = arr6[j];
+                j = j - 1;
+            }
+            arr6[j + 1] = key;
+        }
+
+        System.out.print("Mang random insertion sort: ");
+        for (int i: arr6) System.out.print(i + " ");
+        System.out.println();
+
     }
 }
