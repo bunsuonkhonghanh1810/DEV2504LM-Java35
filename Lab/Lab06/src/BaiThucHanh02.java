@@ -1,0 +1,2 @@
+public class BaiThucHanh02 {
+}
