@@ -50,5 +50,12 @@ public class EmployeeService {
                 item.setGender(employee.getGender());
             }
         });
+
+        return employee;
+    }
+
+    public boolean deleteEmployee(int id) {
+        Employee check = getEmployee(id);
+        return employees.remove(check);
     }
 }
