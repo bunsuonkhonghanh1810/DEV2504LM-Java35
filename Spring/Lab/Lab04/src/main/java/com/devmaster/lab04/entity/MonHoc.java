@@ -1,39 +1,19 @@
-package com.devmaster.lab03.entity;
+package com.devmaster.lab04.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Getter
+@Setter
+@Entity
 public class MonHoc {
+    @Id
     String maMonHoc;
     String tenMonHoc;
     int soTiet;
-
-    public MonHoc() {}
-
-    public MonHoc(String maMonHoc, String tenMonHoc, int soTiet) {
-        this.maMonHoc = maMonHoc;
-        this.tenMonHoc = tenMonHoc;
-        this.soTiet = soTiet;
-    }
-
-    public String getMaMonHoc() {
-        return maMonHoc;
-    }
-
-    public void setMaMonHoc(String maMonHoc) {
-        this.maMonHoc = maMonHoc;
-    }
-
-    public String getTenMonHoc() {
-        return tenMonHoc;
-    }
-
-    public void setTenMonHoc(String tenMonHoc) {
-        this.tenMonHoc = tenMonHoc;
-    }
-
-    public int getSoTiet() {
-        return soTiet;
-    }
-
-    public void setSoTiet(int soTiet) {
-        this.soTiet = soTiet;
-    }
 }

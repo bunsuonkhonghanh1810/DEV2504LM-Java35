@@ -1,29 +1,18 @@
-package com.devmaster.lab03.entity;
+package com.devmaster.lab04.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Getter
+@Setter
+@Entity
 public class Khoa {
+    @Id
     String maKhoa;
     String tenKhoa;
-
-    public Khoa() {}
-
-    public Khoa(String maKhoa, String tenKhoa) {
-        this.maKhoa = maKhoa;
-        this.tenKhoa = tenKhoa;
-    }
-
-    public String getMaKhoa() {
-        return maKhoa;
-    }
-
-    public void setMaKhoa(String maKhoa) {
-        this.maKhoa = maKhoa;
-    }
-
-    public String getTenKhoa() {
-        return tenKhoa;
-    }
-
-    public void setTenKhoa(String tenKhoa) {
-        this.tenKhoa = tenKhoa;
-    }
 }
