@@ -1,7 +1,6 @@
 package com.devmaster.lab04.controller;
 
 import com.devmaster.lab04.dto.EmployeeDTO;
-import com.devmaster.lab04.entity.Employee;
 import com.devmaster.lab04.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

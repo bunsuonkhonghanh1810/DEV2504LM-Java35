@@ -21,7 +21,7 @@ public class KhoaServiceImpl implements KhoaService {
 
     public KhoaServiceImpl() {
         khoaList.addAll(Arrays.asList(
-                new Khoa("MK001", "Cng nghệ thông tin"),
+                new Khoa("MK001", "Công nghệ thông tin"),
                 new Khoa("MK002", "Vận tải kinh tế"),
                 new Khoa("MK003", "Cơ khí"),
                 new Khoa("MK004", "Lý luận chính trị"),

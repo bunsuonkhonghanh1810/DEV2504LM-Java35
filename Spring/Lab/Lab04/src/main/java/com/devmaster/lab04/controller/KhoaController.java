@@ -1,9 +1,7 @@
 package com.devmaster.lab04.controller;
 
 import com.devmaster.lab04.dto.KhoaDTO;
-import com.devmaster.lab04.entity.Khoa;
 import com.devmaster.lab04.service.KhoaService;
-import com.devmaster.lab04.service.impl.KhoaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,7 +1,6 @@
 package com.devmaster.lab04.controller;
 
 import com.devmaster.lab04.dto.MonHocDTO;
-import com.devmaster.lab04.entity.MonHoc;
 import com.devmaster.lab04.service.MonHocService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
