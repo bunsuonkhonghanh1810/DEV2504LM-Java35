@@ -18,97 +18,77 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"
     ></script>
+    <style>
+        .product-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        td {
+            vertical-align: middle !important;
+        }
+
+        .status-badge {
+            font-size: 0.875rem;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="mb-0">
                     <i class="fa-solid fa-box-open pe-2"></i>Quản lý sản phẩm
                 </h4>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customerModal">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
                     <i class="fa-solid fa-circle-plus pe-2"></i>Thêm sản phẩm mới
                 </button>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div th:if="${products.size() == 0}">
+                    <h4>Không có sản phẩm nào</h4>
+                </div>
+                <div th:if="${products.size() > 0}" class="table-responsive">
                     <table class="table table-hover">
                         <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Tên sản phẩm</th>
-                            <th>Ảnh</th>
-                            <th>Số lượng</th>
-                            <th>Giá (VNĐ)</th>
-                            <th>Trạng thái</th>
-                            <th>Thao tác</th>
-                        </tr>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Ảnh</th>
+                                <th>Số lượng</th>
+                                <th>Giá (VNĐ)</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Laptop Dell XPS 13</td>
-                            <td><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=100&h=100&fit=crop" alt="Dell XPS 13" class="product-img"></td>
-                            <td><span class="badge bg-info">15</span></td>
-                            <td>25,000,000</td>
-                            <td><span class="badge bg-success status-badge">Hoạt động</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn btn-sm btn-warning">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-primary">
-                                        <i class="bi bi-gear"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>PC Gaming MSI</td>
-                            <td><img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=100&h=100&fit=crop" alt="PC Gaming" class="product-img"></td>
-                            <td><span class="badge bg-info">8</span></td>
-                            <td>35,500,000</td>
-                            <td><span class="badge bg-success status-badge">Hoạt động</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn btn-sm btn-warning">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-primary">
-                                        <i class="bi bi-gear"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>MacBook Air M2</td>
-                            <td><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=100&h=100&fit=crop" alt="MacBook Air" class="product-img"></td>
-                            <td><span class="badge bg-warning">0</span></td>
-                            <td>28,000,000</td>
-                            <td><span class="badge bg-secondary status-badge">Ngừng bán</span></td>
-                            <td>
-                                <div class="action-buttons">
-                                    <button class="btn btn-sm btn-warning">
-                                        <i class="bi bi-pencil"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-primary">
-                                        <i class="bi bi-gear"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr th:each="product : ${products}">
+                                <td th:text="${product.id}"></td>
+                                <td th:text="${product.name}"></td>
+                                <td><img th:src="${product.imgUrl}" alt="" class="product-img"></td>
+                                <td>
+                                    <span th:class="'badge ' + (${product.quantity} > 0 ? 'bg-info' : 'bg-warning')" th:text="${product.quantity}"></span>
+                                </td>
+                                <td th:text="${product.price}"></td>
+                                <td>
+                                    <span th:class="'badge' + 'status-badge' + (${product.isActive} ? 'bg-success' : 'bg-secondary')"></span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-sm btn-warning" th:label="edit">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" th:label="delete">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-primary" th:label="gear">
+                                            <i class="fa-solid fa-gear"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -116,71 +96,56 @@
         </div>
     </div>
 
-    <div class="modal fade" id="customerModal" tabindex="-1">
+    <div class="modal fade" id="productModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle">
-                        <i class="fas fa-user-plus me-2"></i>Add Customer
+                        <i class="fa-solid fa-box-open pe-2"></i>Thêm sản phẩm
                     </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form th:object="${customer}" id="customerForm" method="post">
-                        <input type="hidden" id="customerId" >
+                    <form th:action="@{/home/products}" th:object="${product}" id="productForm" method="post">
+                        <input type="hidden" id="productId" th:field="*{id}">
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username" required >
+                                <label for="name" class="form-label">Tên sản phẩm</label>
+                                <input type="text" class="form-control" id="name" required th:field="*{name}">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" required >
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" required >
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="phone" class="form-label">Phone</label>
-                                <input type="tel" class="form-control" id="phone" required >
+                                <label for="quantity" class="form-label">Số lượng</label>
+                                <input type="number" class="form-control" id="quantity" required th:field="*{quantity}">
                             </div>
                         </div>
 
                         <div class="mb-3">
-                            <label for="fullname" class="form-label">Full name</label>
-                            <input type="text" class="form-control" id="fullname" required >
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea class="form-control" id="address" rows="2" required ></textarea>
+                            <label for="imgUrl" class="form-label">Link ảnh</label>
+                            <input type="text" class="form-control" id="imgUrl" required th:field="*{imgUrl}">
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="birthday" class="form-label">Birthday</label>
-                                <input type="date" class="form-control" id="birthday" required >
+                                <label for="price" class="form-label">Giá</label>
+                                <input type="number" class="form-control" id="price" required th:field="*{price}">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <div class="form-check form-switch mt-4">
-                                    <input class="form-check-input" type="checkbox" id="active" checked>
-                                    <label class="form-check-label" for="active">
-                                        Active Status
+                                    <input class="form-check-input" type="checkbox" id="isActive" checked th:field="*{isActive}">
+                                    <label class="form-check-label" for="isActive">
+                                        Trạng thái
                                     </label>
                                 </div>
                             </div>
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" form="customerForm" class="btn btn-primary" >
-                        <i class="fas fa-save me-2"></i>Save Customer
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" form="productForm" class="btn btn-primary" >
+                        <i class="fas fa-save me-2"></i>Lưu sản phẩm
                     </button>
                 </div>
             </div>
